@@ -3,6 +3,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  --black-100: #2B2C35;
+
+  --primary-blue: #2B59FF;
+  --primary-blue-100: #F5F8FF;
+
+  --secondary-orange: #f79761;
+
+  --light-white: rgba(59, 60, 152, 0.03);
+  --light-white-100: rgba(59, 60, 152, 0.02);
+
+  --grey: #747A88;
+
+  --bg-pattern: url('/pattern.png');
+  --bg-hero: url('/hero-bg.png');
 }
 
 @theme inline {
@@ -12,15 +27,27 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg-primary-blue{
+  background-color: var(--primary-blue);
+}
+
+.bg-pattern {
+  background-image: var(--bg-pattern);
+}
+
+.bg-hero-bg {
+  background-image: var(--bg-hero);
 }
