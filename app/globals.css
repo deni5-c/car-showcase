@@ -5,16 +5,14 @@
   --foreground: #171717;
   
   --black-100: #2B2C35;
-
+  --grey: #747A88;
   --primary-blue: #2B59FF;
   --primary-blue-100: #F5F8FF;
-
   --secondary-orange: #f79761;
 
   --light-white: rgba(59, 60, 152, 0.03);
   --light-white-100: rgba(59, 60, 152, 0.02);
 
-  --grey: #747A88;
 
   --bg-pattern: url('/pattern.png');
   --bg-hero: url('/hero-bg.png');
@@ -40,6 +38,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.text-black-100 {
+  color: var(--black-100);
+}
+
+.text-gray{
+  color: var(--grey)
+}
+
 .bg-primary-blue{
   background-color: var(--primary-blue);
 }
@@ -56,6 +62,4 @@ body {
   background-image: var(--bg-hero);
 }
 
-.text-gray{
-  color: var(--grey)
-}
+

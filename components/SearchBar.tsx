@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import React, {useState} from 'react'
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
-import SearchManufacturer from './SearchManufacturer'
-import { Button } from '@headlessui/react'
+import Image from "next/image";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import SearchManufacturer from "./SearchManufacturer";
 
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   <button type='submit' className={`-ml-3 z-10 ${otherClasses}`}>
@@ -19,76 +19,75 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
 );
 
 const SearchBar = () => {
-  const [manufacturer, setManufacturer] = useState('')
-  const [model, setModel] = useState('')
-  const router = useRouter()
-  
+  const [manufacturer, setManuFacturer] = useState("");
+  const [model, setModel] = useState("");
+
+  const router = useRouter();
+
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if(manufacturer === '' || model === '') {
-      return alert('Please fill in the search bar')
+    if (manufacturer.trim() === "" && model.trim() === "") {
+      return alert("Please provide some input");
     }
 
-    updateSearchParams(
-      model.toLowerCase(), 
-      manufacturer.toLowerCase()
-    )
-
-  }
+    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+  };
 
   const updateSearchParams = (model: string, manufacturer: string) => {
-    const searchParams = new URLSearchParams(window.location.search)
+    // Create a new URLSearchParams object using the current URL search parameters
+    const searchParams = new URLSearchParams(window.location.search);
 
-    if(model) {
-      searchParams.set('model', model)
+    // Update or delete the 'model' search parameter based on the 'model' value
+    if (model) {
+      searchParams.set("model", model);
     } else {
-      searchParams.delete('model', model)
+      searchParams.delete("model");
     }
 
-    if(model) {
-      searchParams.set('manufacturer', manufacturer)
+    // Update or delete the 'manufacturer' search parameter based on the 'manufacturer' value
+    if (manufacturer) {
+      searchParams.set("manufacturer", manufacturer);
     } else {
-      searchParams.delete('manufacturer', manufacturer)
+       searchParams.delete("manufacturer");
     }
-  
-    const newPathname = `${window.location.pathname}?${searchParams.toString()}`
 
-    router.push(newPathname)
-  }
+    // Generate the new pathname with the updated search parameters
+    const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+
+    router.push(newPathname);
+  };
 
   return (
     <form className='flex items-center justify-start max-sm:flex-col w-full relative max-sm:gap-4 max-w-3xl' onSubmit={handleSearch}>
-        <div className='flex-1 max-sm:w-full flex justify-start items-center relative'>
-            <SearchManufacturer 
-                manufacturer={manufacturer}
-                setManufacturer={setManufacturer}    
-            />
-            <SearchButton otherClasses='sm:hidden' />
-        </div>
-
-        <div className='flex-1 max-sm:w-full flex justify-start items-center relative'>
-          <Image
-            src="/model-icon.png"
-            alt='car model'
-            width={25}
-            height={25}
-            className='absolute w-[20px] h-[20px] ml-4'
-          />
-
-          <input 
-            type="text" 
-            name='model'
-            value={model}
-            onChange={(e) => setModel(e.target.value)}
-            placeholder='Tiguan'
-            className='w-full h-[48px] pl-12 p-4 bg-light-white rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm'
-          />
-          <SearchButton otherClasses='sm:hidden' />
-        </div>
-        <SearchButton otherClasses='max-sm:hidden' />
+      <div className='flex-1 max-sm:w-full flex justify-start items-center relative'>
+        <SearchManufacturer
+          manufacturer={manufacturer}
+          setManuFacturer={setManuFacturer}
+        />
+        <SearchButton otherClasses='sm:hidden' />
+      </div>
+      <div className='flex-1 max-sm:w-full flex justify-start items-center relative'>
+        <Image
+          src='/model-icon.png'
+          width={25}
+          height={25}
+          className='absolute w-[20px] h-[20px] ml-4'
+          alt='car model'
+        />
+        <input
+          type='text'
+          name='model'
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+          placeholder='Tiguan...'
+          className='w-full h-[48px] pl-12 p-4 bg-light-white rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm'
+        />
+        <SearchButton otherClasses='sm:hidden' />
+      </div>
+      <SearchButton otherClasses='max-sm:hidden' />
     </form>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;
