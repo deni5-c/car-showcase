@@ -32,9 +32,23 @@ export interface CarProps {
 }
 
 export interface FilterProps {
-    manufacturer: String
-    year: number
-    fuel: String
-    limit: number
-    model: String
+  manufacturer?: string;
+  year?: number;
+  model?: string;
+  limit?: number;
+  fuel?: string;
+}
+
+export interface HomeProps {
+  searchParams: FilterProps;
+}
+
+export interface OptionProps {
+    title: string
+    value: string
+}
+
+export interface CustomFilterProps {
+    title: string
+    options: OptionProps[]
 }
