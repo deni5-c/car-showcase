@@ -2,16 +2,21 @@ import Image from "next/image";
 
 import { Hero, SearchBar, CustomFilter, CarCard } from "@/components";
 import { fetchCarData } from "@/utils";
+import { HomeProps } from "@/types";
+import { fuels, yearsOfProduction } from "@/constants";
 
 
-export default async function Home( {searchParams}) {
+export default async function Home({ searchParams }: HomeProps) {
   const allCars = await fetchCarData({
-    manufacturer: searchParams.manufacturer ||'' ,
+    manufacturer: searchParams.manufacturer || "",
     year: searchParams.year || 2022,
-    fuel: searchParams.fuel || '',
+    fuel: searchParams.fuel || "",
     limit: searchParams.limit || 10,
-    model: searchParams.model || '',
+    model: searchParams.model || "",
   });
+
+
+
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
@@ -26,12 +31,11 @@ export default async function Home( {searchParams}) {
           </p>
         </div>
 
-        <div className="mt-12 w-full flex-between items-center flex-wrap gap-5">
+        <div className="mt-12 w-full flex justify-between items-center flex-wrap gap-5">
           <SearchBar />
-
-          <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
-            <CustomFilter title="fuel" />
-            <CustomFilter title="year" />
+          <div className="flex flex-row items-start justify-start gap-y-2.5 gap-x-2.5 text-black-100 z-0">
+            <CustomFilter title="fuel" options={fuels} />
+            <CustomFilter title="year" options={yearsOfProduction} />
           </div>
         </div>
 
