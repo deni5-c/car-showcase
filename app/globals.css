@@ -44,10 +44,18 @@ body {
   background-color: var(--primary-blue);
 }
 
+.bg-primary-blue-100{
+  background-color: var( --primary-blue-100);
+}
+
 .bg-pattern {
   background-image: var(--bg-pattern);
 }
 
 .bg-hero-bg {
   background-image: var(--bg-hero);
+}
+
+.text-gray{
+  color: var(--grey)
 }
